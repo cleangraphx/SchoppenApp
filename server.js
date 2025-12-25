@@ -46,10 +46,8 @@ app.post('/login', async (req, res) => {
     const { username, password } = req.body;
 
     try {
-        // Hier prüfen wir die Verbindung
         console.log(`Versuche Login für User: ${username}`);
 
-        // Achtung: Wir nutzen hier den adminPool
         const [rows] = await adminPool.query('SELECT * FROM Benutzer WHERE Benutzername = ? AND Passwort = ?', [username, password]);
 
         if (rows.length > 0) {
@@ -62,17 +60,17 @@ app.post('/login', async (req, res) => {
             console.log("Login fehlgeschlagen: Falsche Daten");
         }
     } catch (error) {
-        // HIER wird der Absturz abgefangen
         console.error("SCHWERER FEHLER BEIM LOGIN:", error);
         res.status(500).send("Serverfehler beim Login: " + error.message);
     }
 });
 
-app.get('/data', authenticateToken, dbSelector, async (req, res) => {
+app.get('/api/data', authenticateToken, dbSelector, async (req, res) => {
 	try {
-		const [rows] = await req.db.query('SELECT * FROM Daten');
+		const [rows] = await req.db.query('SELECT * FROM Teilnehmer');
 		res.json(rows);
 	} catch (e) {
+        console.error(e);
 		res.status(500).send(e.message);
 	}
 });
