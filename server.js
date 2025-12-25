@@ -75,4 +75,9 @@ app.get('/api/data', authenticateToken, dbSelector, async (req, res) => {
 	}
 });
 
+app.get('/test', async (req, res) => {
+    res.json("online");
+    res.status(200);
+})
+
 app.listen(3000, () => console.log('Server läuft auf p3000'));

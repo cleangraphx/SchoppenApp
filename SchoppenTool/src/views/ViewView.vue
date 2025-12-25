@@ -8,7 +8,7 @@
     const token = localStorage.getItem('token');
 
     try {
-      const response = await fetch('/api/daten', {
+      const response = await fetch('jonserver:3000/api/daten', {
         headers: {
           'Authorization': 'Bearer ' + token
         }
