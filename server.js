@@ -75,6 +75,34 @@ app.get('/api/data', authenticateToken, dbSelector, async (req, res) => {
 	}
 });
 
+app.post('/api/input/teilnehmer', authenticateToken, dbSelector, async (req, res) => {
+    console.log('Versuche neuen Teilnehmer hinzuzufügen');
+
+    const {
+        vorname,
+        nachname,
+        geschlecht,
+        geburtstag,
+        adresse,
+        email
+    } = req.body;
+
+    console.log(`Neuer Teinehmer: ${vorname} ${nachname}`);
+
+    if (!vorname || !nachname || !geschlecht || !geburtstag || !adresse || !email) {
+        return res.status(400).send("Bitte alle Felder ausfüllen.");
+    }
+
+    try {
+        await req.db.query('INSERT INTO Teilnehmer (Vorname, Nachname, Geschlecht, Geburtstag, Adresse, Email) VALUES (?, ?, ?, ?, ?, ?)', [vorname, nachname, geschlecht, geburtstag, adresse, email]);
+        res.status(201).send('Teilnehmer gespeichert.');
+        console.log('Teilnehmer gespeichert.');
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Datenbankfehler');
+    }
+});
+
 app.get('/test', async (req, res) => {
     res.json("online");
     res.status(200);

@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import LoginView from '../views/LoginView.vue'
 import ViewView from '@/views/ViewView.vue'
+import InputTeilnehmerView from '@/views/InputTeilnehmerView.vue'
 
 
 const router = createRouter({
@@ -22,6 +23,12 @@ const router = createRouter({
       path: '/view',
       name: 'view',
       component: ViewView,
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/input/teilnehmer',
+      name: 'teilnehmer-input',
+      component: InputTeilnehmerView,
       meta: { requiresAuth: true }
     }
   ],
