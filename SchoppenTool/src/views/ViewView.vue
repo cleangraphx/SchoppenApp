@@ -23,6 +23,14 @@
       console.log("Verbindungsfehler:", error);
     }
   });
+
+  const formatDate = (dateString) => {
+    if (!dateString) {
+      return '';
+    }
+    const [year, month, day] = dateString.split('-');
+    return `${day}.${month}.${year}`;
+  }
 </script>
 
 <template>
@@ -44,7 +52,7 @@
           <th>{{ row.Vorname }}</th>
           <th>{{ row.Nachname }}</th>
           <th>{{ row.Geschlecht }}</th>
-          <th>{{ row.Geburtstag }}</th>
+          <th>{{ formatDate(row.Geburtstag) }}</th>
           <th>{{ row.Addresse }}</th>
           <th>{{ row.Email }}</th>
           <th>Letzte Freizeit</th>
