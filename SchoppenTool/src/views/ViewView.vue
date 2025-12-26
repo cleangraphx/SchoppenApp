@@ -8,7 +8,7 @@
     const token = localStorage.getItem('token');
 
     try {
-      const response = await fetch('jonserver:3000/api/daten', {
+      const response = await fetch('http://jonserver:3000/api/data', {
         headers: {
           'Authorization': 'Bearer ' + token
         }
@@ -40,13 +40,13 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="row in tabellenDaten" :key="row.id">
-          <th>{{ row.id }}</th>
+        <tr v-for="row in tabellenDaten" :key="row.ID">
           <th>{{ row.Vorname }}</th>
           <th>{{ row.Nachname }}</th>
-          <th>{{ row.Geburtsag }}</th>
-          <th>Adresse</th>
-          <th>E-Mail</th>
+          <th>{{ row.Geschlecht }}</th>
+          <th>{{ row.Geburtstag }}</th>
+          <th>{{ row.Addresse }}</th>
+          <th>{{ row.Email }}</th>
           <th>Letzte Freizeit</th>
         </tr>
       </tbody>
@@ -64,7 +64,7 @@
     width: 100%;
     max-height: 100%;
     overflow-y: scroll;
-    margin: 20px;
+    padding: 20px;
   }
   th, td {
     padding: 10px;
@@ -76,6 +76,11 @@
   }
   tbody tr {
     border-bottom: 1px dashed #ccc;
+    transition: background-color 0.15s ease-in-out;
+  }
+  tbody tr:hover {
+    background-color: #383838;
+    color: white;
   }
   tbody tr:last-child {
     border-bottom: none;
