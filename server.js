@@ -10,17 +10,17 @@ app.use(express.json());
 const SECRET_KEY = "SichererSchluessel";
 
 const adminPool = mysql.createPool({
-	host: 'localhost', user: 'db_admin', password: 'admin', database: 'SchoppenTool'
+	host: 'localhost', user: 'db_admin', password: 'admin', database: 'SchoppenTool', dateStrings: true
 });
 
 const verwaltungsPool = mysql.createPool({
-	host: 'localhost', user: 'db_verwaltung', password: 'verwaltung', database: 'SchoppenTool'
+	host: 'localhost', user: 'db_verwaltung', password: 'verwaltung', database: 'SchoppenTool', dateStrings: true
 });
 
 const dbSelector = (req, res, next) => {
 	const role = req.user ? req.user.role : null;
 
-	if (role === 'admin') {
+	if (role === 'Admin') {
 		req.db = adminPool;
 		console.log("nutze Admin Verbindung");
 	} else {

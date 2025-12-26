@@ -43,7 +43,7 @@
       errors.nachname = 'Nachname darf nicht leer sein!';
       isValid = false;
     }
-    if (!(form.geschlecht === 'männlich') || !(form.geschlecht === 'weiblich')) {
+    if (!form.geschlecht) {
       errors.geschlecht = 'Geschlecht auswählen';
       isValid = false;
     }
@@ -66,7 +66,7 @@
     const token = localStorage.getItem('token');
 
     try {
-      const res = await fetch('http://localhost:3000/api/input/teilnehmer', {
+      const res = await fetch('http://jonserver:3000/api/input/teilnehmer', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
