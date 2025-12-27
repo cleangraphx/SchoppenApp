@@ -10,17 +10,17 @@ app.use(express.json());
 const SECRET_KEY = "SichererSchluessel";
 
 const adminPool = mysql.createPool({
-	host: 'localhost', user: 'db_admin', password: 'admin', database: 'SchoppenTool'
+	host: 'localhost', user: 'db_admin', password: 'admin', database: 'SchoppenTool', dateStrings: true
 });
 
 const verwaltungsPool = mysql.createPool({
-	host: 'localhost', user: 'db_verwaltung', password: 'verwaltung', database: 'SchoppenTool'
+	host: 'localhost', user: 'db_verwaltung', password: 'verwaltung', database: 'SchoppenTool', dateStrings: true
 });
 
 const dbSelector = (req, res, next) => {
 	const role = req.user ? req.user.role : null;
 
-	if (role === 'admin') {
+	if (role === 'Admin') {
 		req.db = adminPool;
 		console.log("nutze Admin Verbindung");
 	} else {
@@ -46,10 +46,8 @@ app.post('/login', async (req, res) => {
     const { username, password } = req.body;
 
     try {
-        // Hier prüfen wir die Verbindung
         console.log(`Versuche Login für User: ${username}`);
 
-        // Achtung: Wir nutzen hier den adminPool
         const [rows] = await adminPool.query('SELECT * FROM Benutzer WHERE Benutzername = ? AND Passwort = ?', [username, password]);
 
         if (rows.length > 0) {
@@ -62,19 +60,52 @@ app.post('/login', async (req, res) => {
             console.log("Login fehlgeschlagen: Falsche Daten");
         }
     } catch (error) {
-        // HIER wird der Absturz abgefangen
         console.error("SCHWERER FEHLER BEIM LOGIN:", error);
         res.status(500).send("Serverfehler beim Login: " + error.message);
     }
 });
 
-app.get('/data', authenticateToken, dbSelector, async (req, res) => {
+app.get('/api/data', authenticateToken, dbSelector, async (req, res) => {
 	try {
-		const [rows] = await req.db.query('SELECT * FROM Daten');
+		const [rows] = await req.db.query('SELECT * FROM Teilnehmer');
 		res.json(rows);
 	} catch (e) {
+        console.error(e);
 		res.status(500).send(e.message);
 	}
 });
+
+app.post('/api/input/teilnehmer', authenticateToken, dbSelector, async (req, res) => {
+    console.log('Versuche neuen Teilnehmer hinzuzufügen');
+
+    const {
+        vorname,
+        nachname,
+        geschlecht,
+        geburtstag,
+        adresse,
+        email
+    } = req.body;
+
+    console.log(`Neuer Teinehmer: ${vorname} ${nachname}`);
+
+    if (!vorname || !nachname || !geschlecht || !geburtstag || !adresse || !email) {
+        return res.status(400).send("Bitte alle Felder ausfüllen.");
+    }
+
+    try {
+        await req.db.query('INSERT INTO Teilnehmer (Vorname, Nachname, Geschlecht, Geburtstag, Adresse, Email) VALUES (?, ?, ?, ?, ?, ?)', [vorname, nachname, geschlecht, geburtstag, adresse, email]);
+        res.status(201).send('Teilnehmer gespeichert.');
+        console.log('Teilnehmer gespeichert.');
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Datenbankfehler');
+    }
+});
+
+app.get('/test', async (req, res) => {
+    res.json("online");
+    res.status(200);
+})
 
 app.listen(3000, () => console.log('Server läuft auf p3000'));
