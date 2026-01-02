@@ -1,0 +1,13 @@
+Datenstruktur:
+
+zimmerDaten {
+    zimmername: Name vom Zimmer
+    maximal:    Maximale Teilnehmer in diesem Zimmer (kann geändert werden -> Änderungen in SQL übertragen)
+    teilnehmer: {
+        name:       Vorname + Nachname vom Teilnehmer
+        geschlecht: männlich / weiblich
+        alter:      Alter in Jahren
+    }
+    aktiviert:  aktiviert / deaktiviert
+    geschlecht: männlich / weiblich
+}
