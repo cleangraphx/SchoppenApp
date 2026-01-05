@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import LoginView from '../views/LoginView.vue'
 import ViewView from '@/views/ViewView.vue'
 import InputTeilnehmerView from '@/views/InputTeilnehmerView.vue'
+import ZimmerView from '@/views/ZimmerView.vue'
 
 
 const router = createRouter({
@@ -30,6 +31,11 @@ const router = createRouter({
       name: 'teilnehmer-input',
       component: InputTeilnehmerView,
       meta: { requiresAuth: true }
+    },
+    {
+      path: '/zimmer',
+      name: 'zimmer',
+      component: ZimmerView
     }
   ],
 })
