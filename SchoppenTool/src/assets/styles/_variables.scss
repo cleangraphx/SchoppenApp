@@ -1,0 +1,57 @@
+// Farbpalette:
+
+/* Hauptfarben */
+$color-brand-primary: #3498db;        // Blau für Aktionen/Links
+$color-brand-secondary: #2c3e50;      // Dunkles Blaugrau
+
+/* Grautöne */
+$color-gray-900: #1a1a1a;             // Ganz dunkles Grau
+$color-gray-800: #333333;             // Dunkelgrau für den Header
+$color-gray-700: #4a4a4a;             // Dunkelgrau aber nicht so ganz dunkel
+$color-gray-500: #999999;             // Mittelgrau
+$color-gray-200: #e0e0e0;             // Hellgrau Für Tabellen-Rahmen
+$color-gray-100: #f5f7fa;             // Heller Hintergrund auch bekannt als sehr helles grau für die App
+$color-white:    #ffffff;             // Tatsächlich weiß
+
+/* Status-Farben */
+$color-success:  #27ae60;             // Speichern erfolgreich = Grün
+$color-warning:  #f39c12;             // Achtung / Bearbeitung = Gelb
+$color-danger:   #c0392b;             // Löschen / Fehler      = Rot
+
+
+// Welche Farben für was benutzt werden:
+
+/* Body Layout Text */
+$bg-body:       $color-gray-100;
+$text-main:     $color-gray-800;
+$text-muted:    $color-gray-500;
+$font-family-base:  'Inter', 'Roboto', sans-serif;
+
+/* Header */
+$header-bg:     $color-gray-800;
+$header-text:   $color-white;
+$header-height: 64px;
+$header-btn-hover:  rgba(255, 255, 255, 0.1); // Das ist so transparentes Weiß zum aufhellen
+
+/* Knöpfe (Buttons) */
+$btn-primary-bg:    $color-brand-primary;
+$btn-primary-text:  $color-white;
+$btn-radius:    4px;
+
+
+// Norm-Größen
+
+/* Distanzen */
+$spacing-xs:    4px;
+$spacing-sm:    8px;
+$spacing-md:    16px; // md = medium = standard
+$spacing-lg:    24px;
+$spacing-xl:    32px;
+
+/* Gebogenheiten */
+$border-radius-sm:  4px;
+$border-radius-lg:  8px;
+
+/* Schattenwurf */
+$shadow-sm: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+$shadow-md: 0 3px 6px rgba(0,0,0,0.16), 0 3px 5px rgba(0,0,0,0.23);
