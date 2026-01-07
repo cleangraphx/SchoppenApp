@@ -1,9 +1,15 @@
 <template>
-	<div class="login">
-		<h2>Login</h2>
-		<input v-model="username" placeholder="Benutzername" />
-		<input v-model="password" placeholder="Passwort" />
-		<button @click="login">Einloggen</button>
+	<div class="innercontainer">
+		<div class="card">
+			<div class="card-header">
+				<h2>Login</h2>
+			</div>
+			<div class="card-body">
+				<input v-model="username" placeholder="Benutzername" />
+				<input v-model="password" placeholder="Passwort" />
+				<button @click="login">Einloggen</button>
+			</div>
+		</div>
 	</div>
 </template>
 
@@ -16,7 +22,7 @@
 	const router = useRouter();
 
 	const login = async () => {
-		const res = await fetch('http://192.168.178.41:3000/login', {
+		const res = await fetch('http://jonserver:3000/login', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({ username: username.value, password: password.value })
@@ -32,3 +38,18 @@
 		}
 	};
 </script>
+
+<style scoped>
+	input {
+		height: auto;
+		width: fit-content;
+		padding: 8px;
+		background-color: lightgray;
+		border: 1px solid gray;
+	}
+	div.card-body {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+	}
+</style>
