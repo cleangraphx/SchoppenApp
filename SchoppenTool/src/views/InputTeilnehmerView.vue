@@ -103,7 +103,41 @@ const submitForm = async () => {
       </div>
       <div class="card-body">
         <form @submit.prevent="submitForm">
-          <table class="data-table">
+          <div class="input-container">
+            <input v-model="form.vorname" type="text" id="vorname" required autocomplete="off" />
+            <label for="vorname">Vorname:</label>
+            <p v-if="errors.vorname" class="error-msg">{{ errors.vorname }}</p>
+          </div>
+          <div class="input-container">
+            <input v-model="form.nachname" type="text" id="nachname" required autocomplete="off" />
+            <label for="nachname">Nachname:</label>
+            <p v-if="errors.nachname" class="error-msg">{{ errors.nachname }}</p>
+          </div>
+          <div class="input-container">
+            <select v-model="form.geschlecht" name="geschlecht" id="geschlecht" required autocomplete="off">
+              <option value="männlich">männlich</option>
+              <option value="weiblich">weiblich</option>
+            </select>
+            <label for="geschlecht">Geschlecht:</label>
+            <p v-if="errors.geschlecht" class="error-msg">{{ errors.geschlecht }}</p>
+          </div>
+          <div class="input-container">
+            <input v-model="form.geburtstag" type="date" id="geburtstag" required autocomplete="off" />
+            <label for="geburtstag">Geburtstag:</label>
+            <p v-if="errors.geburtstag" class="error-msg">{{ errors.geburtstag }}</p>
+          </div>
+          <div class="input-container">
+            <input v-model="adresse" type="text" id="adresse" required autocomplete="off" />
+            <label for="adresse">Adresse:</label>
+            <p v-if="errors.adresse" class="error-msg">{{ errors.adresse }}</p>
+          </div>
+          <div class="input-container">
+            <input v-model="email" type="text" id="email" required autocomplete="off" />
+            <label for="email">E-Mail:</label>
+            <p v-if="errors.email" class="error-msg">{{ errors.email }}</p>
+          </div>
+
+<!--          <table class="data-table">
             <tbody>
               <tr>
                 <td>
@@ -150,7 +184,7 @@ const submitForm = async () => {
                 </td>
                 <td>
                   <div class="editable-input" contenteditable="true">Addresse</div>
-                  <!--                  /* <input v-model="form.adresse" type="text" placeholder="Adresse" id="adresse" /> */-->
+                  &lt;!&ndash;                  /* <input v-model="form.adresse" type="text" placeholder="Adresse" id="adresse" /> */&ndash;&gt;
                 </td>
                 <td v-if="errors.adresse" class="error-msg">{{ errors.adresse }}</td>
               </tr>
@@ -164,7 +198,7 @@ const submitForm = async () => {
                 <td v-if="errors.email" class="error-msg">{{ errors.email }}</td>
               </tr>
             </tbody>
-          </table>
+          </table>-->
 
           <div v-if="status.success" class="success-box">✅ Erfolgreich gespeichert!</div>
           <div v-if="status.error" class="error-box">❌ {{ status.error }}</div>

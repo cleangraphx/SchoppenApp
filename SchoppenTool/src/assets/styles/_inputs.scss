@@ -12,7 +12,7 @@
     transition: all 0.5s ease-in-out;
   }
 
-  input {
+  input, select {
     border: none;
     border-bottom: 1px solid $color-gray-200;
     background-color: transparent;
@@ -22,13 +22,13 @@
     color: $text-main;
   }
 
-  input:focus {
+  input:focus, select:focus {
     border: none;
     outline: none;
     border-bottom: 1px solid $color-brand-primary;
   }
 
-  input:focus ~ label, input:valid ~ label {
+  input:focus ~ label, input:valid ~ label, select:focus ~ label, select:valid ~ label {
     top: calc($spacing-xs * -1);
     font-size: 0.65rem;
   }
