@@ -5,8 +5,14 @@
 				<h2>Login</h2>
 			</div>
 			<div class="card-body">
-				<input v-model="username" placeholder="Benutzername" />
-				<input v-model="password" placeholder="Passwort" />
+				<div class="input-container">
+          <input v-model="username" id="Benutzername" type="text" required/>
+          <label for="Benutzername">Benutzername</label>
+        </div>
+				<div class="input-container">
+          <input v-model="password" id="Passwort" type="password" required/>
+          <label for="Password">Passwort</label>
+        </div>
 				<button @click="login">Einloggen</button>
 			</div>
 		</div>
@@ -40,13 +46,6 @@
 </script>
 
 <style scoped>
-	input {
-		height: auto;
-		width: fit-content;
-		padding: 8px;
-		background-color: lightgray;
-		border: 1px solid gray;
-	}
 	div.card-body {
 		display: flex;
 		flex-direction: column;
