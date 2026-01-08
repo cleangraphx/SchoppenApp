@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import LoginView from '../views/LoginView.vue'
 import ViewView from '@/views/ViewView.vue'
 import InputTeilnehmerView from '@/views/InputTeilnehmerView.vue'
-import ZimmerView from '@/views/ZimmerView.vue'
+import ZimmerplanView from '@/views/ZimmerplanView.vue'
 
 
 const router = createRouter({
@@ -28,7 +28,7 @@ const router = createRouter({
     {
       path: '/zimmer',
       name: 'zimmer',
-      component: ZimmerView
+      component: ZimmerplanView
     }
   ],
 })

@@ -1,85 +1,43 @@
 <script setup>
-import { ref } from 'vue'
-import draggable from 'vuedraggable'
 
-const zimmerDaten = ref([
-  {
-    id: 1,
-    name: 'Wespennest',
-    teilnehmer: [
-      { id: 1, name: 'Max Mustermann', alter: 18, geschlecht: 'männlich' },
-      { id: 2, name: 'Ursula Musterfrau', alter: 22, geschlecht: 'weiblich' },
-    ],
-  },
-  {
-    id: 2,
-    name: 'Bärenhöhle',
-    teilnehmer: [],
-  },
-])
-
-const onChange = (evt) => {
-  if (evt.added) {
-    console.log('Teilnehmer hinzugefügt zu Zimmer', evt.added.element)
-  }
-}
-
-const saveChanges = async () => {
-  console.log('Sende an Datenbank:', JSON.stringify(zimmer.value, null, 2))
-
-  await fetch('http://jonserver:3000/api/input/zimmer', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(zimmer.value),
-  })
-}
 </script>
 
 <template>
   <div class="innercontainer">
-    <div class="card" v-for="zimmer in zimmerDaten" :key="zimmer.ID">
+    <div class="card" v-for="zimmer in daten">
       <div class="card-header">
         <h3>{{ zimmer.name }}</h3>
-        <!--      <div class="zimmerconfig">
-          <button class="zimmerconfig switchbutton aktiv">Aktiviert</button>
-          <button class="zimmerconfig switchbutton geschlecht-m">Männer / Jungs</button>
-          <input type="text" class="zimmerconfig" placeholder="{{  zimmer.maximal  }}">
-        </div>-->
       </div>
-
-      <div class="table-container">
-        <table class="data-table">
-          <thead>
-            <tr>
-              <th>Vorname-Nachname</th>
-              <th>Alter</th>
-              <th>Geschlecht</th>
-            </tr>
-          </thead>
-          <draggable
-            v-model="zimmer.teilnehmer"
-            tag="tbody"
-            group="teilnehmer"
-            item-key="id"
-            @change="onChange"
-          >
-            <template #item="{ element }">
-              <tr class="draggable-row">
-                <td>{{ element.name }}</td>
-                <td>{{ element.alter }}</td>
-                <td>{{ element.geschlecht }}</td>
-              </tr>
-            </template>
-          </draggable>
-        </table>
+      <div class="card-body">
+        <div class="input-container">
+          <input type="text" v-model="zimmer.name" id="zimmer_name" required autocomplete="off">
+          <label for="zimmer_name">Zimmername</label>
+        </div>
+        <div class="input-container">
+          <input type="text" v-model="zimmer.standort" id="zimmer_standort" required autocomplete="off">
+          <label for="zimmer_standort">Standort</label>
+        </div>
+        <div class="input-container">
+          <input type="range" min="1" max="12" v-model="zimmer.anzahl" id="zimmer_anzahl" required autocomplete="off">
+          <label for="zimmer_anzahl">Anzahl Betten</label>
+        </div>
       </div>
-
-      <div v-if="zimmer.teilnehmer.length === 0" class="card-footer">
-        <p>Zimmer ist leer</p>
+      <div class="card-footer">
+        <button type="submit" class="btn btn-save">Speichern</button>
+        <button class="btn btn-delete">Löschen</button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <h3>Neues Zimmer</h3>
+      </div>
+      <div class="card-body">
+        <button class="btn">Hinzufügen</button>
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
+
 </style>
