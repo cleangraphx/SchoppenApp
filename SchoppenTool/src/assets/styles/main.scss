@@ -18,3 +18,31 @@ div.innercontainer {
   height: 90%;
   margin: auto;
 }
+
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: $color-gray-800;
+  color: white;
+  padding: 10px;
+}
+
+.main-header a {
+  color: white;
+  text-decoration: none;
+  margin-right: 15px;
+  font-weight: bold;
+}
+
+.main-header a.router-link-active {
+  color: $color-brand-primary
+}
+
+.main-footer {
+  background-color: $color-gray-100;
+  text-align: center;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+}

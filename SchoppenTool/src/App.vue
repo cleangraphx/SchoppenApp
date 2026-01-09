@@ -4,9 +4,11 @@
       <div class="logo">Schoppen</div>
       <nav v-if="!isLoginPage">
         <router-link to="/">Home</router-link>
-        <router-link to="/tool1">Tool 1</router-link>
-        <router-link to="/tool2">Tool 2</router-link>
-        <button @click="logout" class="logout-btn">Logout</button>
+        <router-link to="/freizeiten">Freizeiten</router-link>
+        <router-link to="/teilnehmer">Teilnehmer</router-link>
+        <router-link to="/zimmerplan">Zimmerplaner</router-link>
+        <button v-if="localStorage.getItem('token')" @click="logout" class="btn-logout">Logout</button>
+        <router-link v-if="!localStorage.getItem('token')" to="/login">Login</router-link>
       </nav>
     </header>
     <main class="content">
@@ -31,41 +33,7 @@
     padding: 20px;
   }
 
-  .main-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 
-    background-color: #333;
-    color: white;
-    padding: 10px;
-  }
-
-  .main-header a {
-    color: white;
-    text-decoration: none;
-    margin-right: 15px;
-    font-weight: bold;
-  }
-
-  .main-header a.router-link-active {
-    color: #42b983; /* Farbe für den aktiven Link */
-  }
-
-  .main-footer {
-    background-color: #f1f1f1;
-    text-align: center;
-    padding: 10px;
-    border-top: 1px solid #ccc;
-  }
-
-  .logout-btn {
-    background: red;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-  }
 </style>
 
 <script setup>
